@@ -4,16 +4,16 @@ const connectDB = require("./utlis/db");
 const ideaRoute = require("./routes/ideas");
 const cors = require("cors");
 const { openai_api } = require("./utlis/config");
-dotenv.config();
+dotenv.config();   
 connectDB();
 const app = express();
 app.use(cors());
 app.use(express.json());
-
+app.set('trust proxy', true)
 app.use("/api/generate-idea/", ideaRoute);
 
 app.get('/', (req,res)=>{
-    res.send("hi")
+    res.send(req.socket.remoteAddress)
 })
 const PORT = process.env.PORT ;
 const server = app.listen(

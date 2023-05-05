@@ -1,5 +1,6 @@
 const { Configuration, OpenAIApi } = require("openai");
 const { openai_api } = require("../utlis/config");
+const Idea = require("../models/ideaModel");
 
 
 
@@ -36,7 +37,13 @@ const generateIdea = async (req, res) => {
 
         });
         res.status(200).json(completion.data.choices)
-        console.log(completion.data.choices);
+        console.log(completion.data);
+        const newIdea = new Idea({
+            ip: req.ip,
+            prompt: prompt,
+            idea: completion.data.choices[0].message.content,
+        });
+        await newIdea.save();
     } catch (error) {
         if (error.response) {
             console.log(error.response.status);
