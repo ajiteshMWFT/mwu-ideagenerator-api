@@ -1,15 +1,23 @@
 const { Configuration, OpenAIApi } = require("openai");
+const { openai_api } = require("../utlis/config");
+
+
+
+
+
 
 const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY||"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",
+    apiKey: openai_api,
 });
+
 const openai = new OpenAIApi(configuration);
 
 
-const generateIdea = async(req, res) => {
+const generateIdea = async (req, res) => {
+
 
     const { business_field, business_type, user_insight } = req.body
-    
+
     const prompt = `genrate an startup idea according to following details
     details:
     filed:${business_field}
