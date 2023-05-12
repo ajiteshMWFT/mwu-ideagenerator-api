@@ -1,11 +1,10 @@
 const express = require("express");
-
 const { rateLimit } = require("../middleware/req-limiter");
-const { generateIdea } = require("../controllers/idea-controller");
+const { generateLogo } = require("../controllers/logo-controller");
 
 const router = express.Router();
-
-router.post("/",rateLimit, generateIdea)
+ 
+router.post("/",rateLimit, generateLogo)
 
 
 

@@ -8,7 +8,7 @@ const rateLimit = async (req, res, next) => {
     const count = await Request.countDocuments({ ip });
   
     // If the limit has been exceeded, send a 429 Too Many Requests response
-    if (count >= 5) {
+    if (count >= 25) {
       return res.status(429).json({ error: 'you can not generate ideas more than five times' });
     }
   
